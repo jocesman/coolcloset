@@ -1,6 +1,10 @@
+import Header from "./components/Header";
+
 const Home = () => {
     return (
-        <h1 className="text-center p-8 bg-yellow-300 text-4xl">Comenzando la App!!!!</h1>
+        <main className="flex min-h-screen flex-col">
+            <Header />
+        </main>
     )
 }
 
