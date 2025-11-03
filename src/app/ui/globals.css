@@ -1,8 +1,0 @@
-@import "tailwindcss";
-
-.primary_text {
-    padding: 15px;
-    text-align: center;
-    background-color: yellowgreen;
-    font-size: 1.5rem;
-}

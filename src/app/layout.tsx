@@ -1,12 +1,11 @@
 import {FC,  PropsWithChildren } from "react";
-import { roboto } from './ui/fonts'
-import "@/app/ui/globals.css"
+// import { inter } from '@/config/fonts'
 
 const RootLayout: FC<PropsWithChildren> = ({children}) => {
     return (
-        <html>
-            <body className={`${roboto.className} antialiased`}>
-                {children}
+        <html>  
+            <body>
+                {/* {children} */}
             </body>
         </html> 
     )
