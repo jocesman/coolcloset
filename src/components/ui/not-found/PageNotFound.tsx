@@ -8,7 +8,7 @@ export const PageNotFound = () => {
       className={`${titleFont.className}
                   flex items-center justify-center
                   h-screen w-screen 
-                  bg-gradient-to-br from-blue-100 to-blue-200 text-gray-800`}
+                  bg-linear-to-br from-blue-100 to-blue-200 text-gray-800`}
     >
       <div
         className="flex flex-col md:flex-row items-center justify-between

@@ -16,7 +16,7 @@ export default async function CategoryPage(props: {
   return (
     <div className="p-10">
       <h1 className="text-3xl font-bold text-blue-600">
-        Category Page =-= {id}
+        Category Page:{id}
       </h1>
     </div>
   );
