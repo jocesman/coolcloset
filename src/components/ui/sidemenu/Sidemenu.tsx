@@ -1,32 +1,51 @@
 'use client'
 
+import { useUIStore } from "@/store"
+import clsx from "clsx"
 import Link from "next/link"
 import { IoCloseOutline, IoLogInOutline, IoLogOutOutline, IoPeopleOutline, IoPersonOutline, IoSearchOutline, IoShirtOutline, IoTicketOutline } from "react-icons/io5"
 
 export const Sidemenu = () => {
+
+  const isSideOpenMenu = useUIStore( state => state.isSideMenuOpen );
+  const closeMenu = useUIStore( state => state.closeSideMenu );
+
   return (
     <div>
 
       {/* Background Green*/ }
-      <div
-        className="fixed top-0 left-0 w-screen h-screen z-10 bg-gray-400 opacity-30"
-      />
+      {
+        isSideOpenMenu && (
+          <div
+            className="fixed top-0 left-0 w-screen h-screen z-10 bg-gray-400 opacity-30"
+          />
+        )
+      }
 
       { /* blur */ }
-      <div 
-        className="fade-in fixed top-0 left-0 w-screen h-screen z-10 backdrop-filter backdrop-blur-sm"
-      />
+      {isSideOpenMenu && (
+        <div 
+          onClick={ closeMenu }
+          className="fade-in fixed top-0 left-0 w-screen h-screen z-10 backdrop-filter backdrop-blur-sm"
+        />
+        )
+      }
 
       { /* Sidemenu */ }
       <nav 
-        //tod: efecto slide
-        className="fixed p-5 right-0 top-0 w-[500px] h-screen bg-white z-20 
-                      shadow-2xl transform transition-all duration-300 ">
+        className={
+          clsx(
+            "fixed p-5 right-0 top-0 w-[500px] h-screen bg-blue-100 z-20 shadow-2xl transform transition-all duration-300 ",
+            {
+              "translate-x-full": !isSideOpenMenu
+            }
+          )
+        }>
         
         <IoCloseOutline 
           size={ 30 }
           className="absolute top-5 right-0 cursor-pointer"
-          onClick={() => console.log('click')}
+          onClick={() => closeMenu()}
         />
         
         {/* Input */  }
