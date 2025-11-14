@@ -1,9 +1,9 @@
-'use client'
+'use client';
 
-import { useUIStore } from "@/store"
-import clsx from "clsx"
-import Link from "next/link"
-import { IoCloseOutline, IoLogInOutline, IoLogOutOutline, IoPeopleOutline, IoPersonOutline, IoSearchOutline, IoShirtOutline, IoTicketOutline } from "react-icons/io5"
+import { useUIStore } from "@/store";
+import clsx from "clsx";
+import Link from "next/link";
+import { IoCloseOutline, IoLogInOutline, IoLogOutOutline, IoPeopleOutline, IoPersonOutline, IoSearchOutline, IoShirtOutline, IoTicketOutline } from "react-icons/io5";
 
 export const Sidemenu = () => {
 
@@ -17,7 +17,7 @@ export const Sidemenu = () => {
       {
         isSideOpenMenu && (
           <div
-            className="fixed top-0 left-0 w-screen h-screen z-10 bg-gray-400 opacity-30"
+            className="fixed top-0 left-0 w-screen h-screen z-10 bg-gray-400 opacity-10"
           />
         )
       }
@@ -35,7 +35,7 @@ export const Sidemenu = () => {
       <nav 
         className={
           clsx(
-            "fixed p-5 right-0 top-0 w-[500px] h-screen bg-blue-100 z-20 shadow-2xl transform transition-all duration-300 ",
+            "fixed p-5 right-0 top-0 w-80 sm:w-[400px] h-screen bg-blue-100 z-20 shadow-2xl transform transition-all duration-75 ",
             {
               "translate-x-full": !isSideOpenMenu
             }
