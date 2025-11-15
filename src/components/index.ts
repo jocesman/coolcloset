@@ -1,5 +1,8 @@
-export * from './products/product-grid/ProductGrid'
-export * from './products/product-grid/ProductGridItem'
+export * from './products/product-grid/ProductGrid';
+export * from './products/product-grid/ProductGridItem';
+
+export * from './product/size-selector/SizeSelector';
+export * from './product/quantity-selector/QuantitySelector';
 
 export * from './ui/sidemenu/Sidemenu';
 export * from './ui/not-found/PageNotFound';
