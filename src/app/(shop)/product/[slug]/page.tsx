@@ -2,7 +2,7 @@ import { titleFont } from "@/config/fonts";
 import { initialData } from "@/seed/seed";
 import { notFound } from "next/navigation";
 import Image from 'next/image';
-import { ProductSlideShow, QuantitySelector, SizeSelector } from "@/components";
+import { ProductMobileSlideShow, ProductSlideShow, QuantitySelector, SizeSelector } from "@/components";
 
 
 interface Props {
@@ -25,8 +25,14 @@ export default async function ProductPage({ params }: Props) {
   return (
     <div className="mt-5 mb-20 grid grid-cols-1 md:grid-cols-3 gap-3">
 
-      {/* 🖼 Slide show */}
       <div className="col-span-1 md:col-span-2 p-4">
+        {/* Mobile Slideshow */}
+        <ProductMobileSlideShow
+          title={product.title}
+          images={product.images}
+          className="block md:hidden"
+        />
+        {/* Desktop Slideshow */}
         {/* <Image
           src={`/products/${product.images[0]}`}
           alt={product.title}
@@ -34,9 +40,10 @@ export default async function ProductPage({ params }: Props) {
           height={1200}
           className="rounded-xl object-cover w-full"
         /> */}
-      <ProductSlideShow 
-        title={ product.title }
-        images={ product.images }
+        <ProductSlideShow
+          title={product.title}
+          images={product.images}
+          className="hidden md:block"
         />
       </div>
 
@@ -50,16 +57,16 @@ export default async function ProductPage({ params }: Props) {
         <p className="text-lg mb-5">${product.price}</p>
 
         {/*Selector de tallas*/}
-        <SizeSelector 
+        <SizeSelector
           SelectedSize={product.sizes[0]}
           availableSizes={product.sizes}
         />
 
         {/*Selector de cantidad*/}
 
-        <QuantitySelector 
-          quantity={ 1 }
-         />
+        <QuantitySelector
+          quantity={1}
+        />
 
         {/*Botón */}
         <button className="btn-primary my-5 ">Agregar al Carrito</button>
