@@ -12,21 +12,25 @@ export const QuantitySelector = ({ quantity }: Props) => {
 
   const [count, setCount] = useState (quantity);
   const onQuantityChanged = (value:number) => {
-    if (count + value < 1 ) return;
-    setCount(count + value);
+    const newValue = count + value;
+    if (newValue < 1 || newValue > 10) return;
+    setCount(newValue);
   }
-
+   
   return (
-    <div className="flex">
-      <button onClick={() => onQuantityChanged(-1)}>
-        <IoRemoveCircleOutline size={30}/>
-      </button>
-      <span className="w-20 mx-3 px-5 bg-gray-200 text-center rounded border">
-        { count }
-      </span>
-      <button onClick={() => onQuantityChanged(1)}>
-        <IoAddCircleOutline size={30}/>
-      </button>
-    </div>
+    <>
+      <h3 className="font-bold mb-4">Cantidad a comprar</h3>
+      <div className="flex">
+        <button onClick={() => onQuantityChanged(-1)}>
+          <IoRemoveCircleOutline size={30}/>
+        </button>
+        <span className="w-20 mx-3 px-5 bg-gray-200 text-center rounded border">
+          { count }
+        </span>
+        <button onClick={() => onQuantityChanged(1)}>
+          <IoAddCircleOutline size={30}/>
+        </button>
+      </div>
+    </>
   )
 }

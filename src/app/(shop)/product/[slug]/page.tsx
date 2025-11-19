@@ -2,7 +2,7 @@ import { titleFont } from "@/config/fonts";
 import { initialData } from "@/seed/seed";
 import { notFound } from "next/navigation";
 import Image from 'next/image';
-import { QuantitySelector, SizeSelector } from "@/components";
+import { ProductSlideShow, QuantitySelector, SizeSelector } from "@/components";
 
 
 interface Props {
@@ -27,14 +27,20 @@ export default async function ProductPage({ params }: Props) {
 
       {/* 🖼 Slide show */}
       <div className="col-span-1 md:col-span-2 p-4">
-        <Image
+        {/* <Image
           src={`/products/${product.images[0]}`}
           alt={product.title}
           width={1200}
           height={1200}
           className="rounded-xl object-cover w-full"
+        /> */}
+      <ProductSlideShow 
+        title={ product.title }
+        images={ product.images }
         />
       </div>
+
+
 
       {/* 📄 Detalles */}
       <div className="col-span-1 px-5 p-4">
@@ -45,14 +51,14 @@ export default async function ProductPage({ params }: Props) {
 
         {/*Selector de tallas*/}
         <SizeSelector 
-          SelectedSize={product.sizes[1]}
+          SelectedSize={product.sizes[0]}
           availableSizes={product.sizes}
         />
 
         {/*Selector de cantidad*/}
 
         <QuantitySelector 
-          quantity={ 2 }
+          quantity={ 1 }
          />
 
         {/*Botón */}
