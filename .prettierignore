@@ -1,0 +1,30 @@
+# Ignorar compilados y dependencias
+node_modules
+.next
+out
+dist
+build
+
+# Archivos de control de versión
+.git
+.gitignore
+
+# Archivos de configuración
+.next-env.d.ts
+
+# Archivos estáticos
+public/**/*.png
+public/**/*.jpg
+public/**/*.jpeg
+public/**/*.svg
+public/**/*.webp
+public/**/*.gif
+
+# Ambiente
+.env
+.env.local
+.env.production
+.env.development
+
+# Otros
+coverage

@@ -1,30 +1,31 @@
-import { titleFont } from "@/config/fonts";
-import { initialData } from "@/seed/seed";
-import { notFound } from "next/navigation";
-import Image from 'next/image';
-import { ProductMobileSlideShow, ProductSlideShow, QuantitySelector, SizeSelector } from "@/components";
-
+import { titleFont } from '@/config/fonts'
+import { initialData } from '@/seed/seed'
+import { notFound } from 'next/navigation'
+import Image from 'next/image'
+import {
+  ProductMobileSlideShow,
+  ProductSlideShow,
+  QuantitySelector,
+  SizeSelector,
+} from '@/components'
 
 interface Props {
   params: {
-    slug: string;
-  };
+    slug: string
+  }
 }
 
 export default async function ProductPage({ params }: Props) {
-  const { slug } = await params;
+  const { slug } = await params
 
-  const product = initialData.products.find(
-    product => product.slug === slug
-  );
+  const product = initialData.products.find(product => product.slug === slug)
 
   if (!product) {
-    notFound();
+    notFound()
   }
 
   return (
     <div className="mt-5 mb-20 grid grid-cols-1 md:grid-cols-3 gap-3">
-
       <div className="col-span-1 md:col-span-2 p-4">
         {/* Mobile Slideshow */}
         <ProductMobileSlideShow
@@ -47,35 +48,24 @@ export default async function ProductPage({ params }: Props) {
         />
       </div>
 
-
-
       {/* 📄 Detalles */}
       <div className="col-span-1 px-5 p-4">
-        <h1 className={`${titleFont.className} antialiased font-bold text-xl`}>
-          {product.title}
-        </h1>
+        <h1 className={`${titleFont.className} antialiased font-bold text-xl`}>{product.title}</h1>
         <p className="text-lg mb-5">${product.price}</p>
 
         {/*Selector de tallas*/}
-        <SizeSelector
-          SelectedSize={product.sizes[0]}
-          availableSizes={product.sizes}
-        />
+        <SizeSelector SelectedSize={product.sizes[0]} availableSizes={product.sizes} />
 
         {/*Selector de cantidad*/}
 
-        <QuantitySelector
-          quantity={1}
-        />
+        <QuantitySelector quantity={1} />
 
         {/*Botón */}
         <button className="btn-primary my-5 ">Agregar al Carrito</button>
 
         <h3 className="font-bold text-sm">Descripción</h3>
         <p className="font-light">{product.description}</p>
-
       </div>
-
     </div>
-  );
+  )
 }

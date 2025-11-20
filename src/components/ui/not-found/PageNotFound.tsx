@@ -1,6 +1,6 @@
-import Link from "next/link";
-import { FaArrowLeft } from "react-icons/fa";
-import { titleFont } from "@/config/fonts";
+import Link from 'next/link'
+import { FaArrowLeft } from 'react-icons/fa'
+import { titleFont } from '@/config/fonts'
 
 export const PageNotFound = () => {
   return (
@@ -32,8 +32,8 @@ export const PageNotFound = () => {
           </p>
 
           <p className="text-gray-600 max-w-md text-base md:text-lg leading-relaxed mx-auto md:mx-0">
-            Lo sentimos, la página que buscas no existe o ha sido movida.  
-            Usa el compás 🧭 para volver a tu camino.
+            Lo sentimos, la página que buscas no existe o ha sido movida. Usa el compás 🧭 para
+            volver a tu camino.
           </p>
         </div>
 
@@ -55,10 +55,12 @@ export const PageNotFound = () => {
 
       {/* ✨ Animación de fondo */}
       <div className="absolute inset-0 -z-10 overflow-hidden">
-        <div className="absolute top-1/2 left-1/2 w-[120%] h-[120%] 
+        <div
+          className="absolute top-1/2 left-1/2 w-[120%] h-[120%] 
                         bg-gradient-radial from-blue-300/40 via-blue-200/20 to-transparent 
-                        blur-3xl animate-pulse-slow -translate-x-1/2 -translate-y-1/2" />
+                        blur-3xl animate-pulse-slow -translate-x-1/2 -translate-y-1/2"
+        />
       </div>
     </div>
-  );
-};
+  )
+}

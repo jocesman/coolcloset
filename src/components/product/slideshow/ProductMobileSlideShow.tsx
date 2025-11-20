@@ -1,26 +1,24 @@
-'use client';
+'use client'
 
-import Image from "next/image";
-import { Swiper, SwiperSlide } from "swiper/react";
-import { FreeMode, Navigation, Autoplay, Pagination } from "swiper/modules";
+import Image from 'next/image'
+import { Swiper, SwiperSlide } from 'swiper/react'
+import { FreeMode, Navigation, Autoplay, Pagination } from 'swiper/modules'
 
-import 'swiper/css';
-import 'swiper/css/free-mode';
-import 'swiper/css/pagination';
+import 'swiper/css'
+import 'swiper/css/free-mode'
+import 'swiper/css/pagination'
 
 import './slideshow.css'
 
 interface Props {
-  images: string[];
-  title: string;
-  className?: string;
+  images: string[]
+  title: string
+  className?: string
 }
 
 export const ProductMobileSlideShow = ({ images, title, className }: Props) => {
-
   return (
     <div className={className}>
-
       <Swiper
         pagination={{ clickable: true }}
         spaceBetween={10}
@@ -40,7 +38,6 @@ export const ProductMobileSlideShow = ({ images, title, className }: Props) => {
           </SwiperSlide>
         ))}
       </Swiper>
-
     </div>
-  );
+  )
 }
