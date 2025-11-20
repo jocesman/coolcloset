@@ -9,7 +9,8 @@
     "start": "next start",
     "lint": "eslint",
     "format": "prettier --write .",
-    "prepare": "husky"
+    "prepare": "husky",
+    "test": "echo \"No tests configured\" && exit 0"
   },
   "dependencies": {
     "clsx": "^2.1.1",
