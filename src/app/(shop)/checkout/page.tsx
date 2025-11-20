@@ -1,4 +1,4 @@
-import { QuantitySelector, Title } from '@/components'
+import { Title } from '@/components'
 import { initialData } from '@/seed/seed'
 import Link from 'next/link'
 import Image from 'next/image'
@@ -21,10 +21,7 @@ export default function () {
 
             {/* Items */}
             {productsInCart.map(product => (
-              <div
-                key={product.slug}
-                className="flex mb-3 p-2 border border-green-400 hover:border-amber-400 hover:border-2"
-              >
+              <div key={product.slug} className="flex mb-3 p-2">
                 <Image
                   src={`/products/${product.images[0]}`}
                   width={100}
