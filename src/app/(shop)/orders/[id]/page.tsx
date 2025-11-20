@@ -1,5 +1,3 @@
-import Link from 'next/link'
-
 import { Title } from '@/components'
 import { initialData } from '@/seed/seed'
 import Image from 'next/image'
@@ -67,7 +65,9 @@ export default async function ({ params }: Props) {
 
           {/* Checkout - Resumen de la Orden de Compra*/}
           <div className="bg-white rounded-xl shadow-xl p-7">
-            <h2 className="text-2xl text-blue-900 font-bold">Dirección de entrega:</h2>
+            <h2 className={`text-3xl text-blue-900 font-bold ${titleFont.className}`}>
+              Dirección de entrega
+            </h2>
             <div className="mb-2">
               <p>Av.Jimenez # 25-58</p>
               <p>Colonia Colón</p>
