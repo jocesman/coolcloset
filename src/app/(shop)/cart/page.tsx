@@ -47,8 +47,10 @@ export default function () {
           </div>
 
           {/* Checkout - Resumen de la Orden de Compra*/}
-          <div className="bg-white rounded-xl shadow-xl p-7">
-            <h2 className={`text-xl mb-2 ${titleFont.className}`}>Resumen del Pedido</h2>
+          <div className="bg-white rounded-xl shadow-xl p-7 h-fit">
+            <h2 className={`text-2xl mb-2 ${titleFont.className} text-blue-800`}>
+              Resumen del Pedido
+            </h2>
             <div className="grid grid-cols-2">
               <span>No. Productos</span>
               <span className="text-right">3 Artículos</span>
