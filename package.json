@@ -13,12 +13,18 @@
     "test": "echo \"No tests configured\" && exit 0"
   },
   "dependencies": {
+    "@prisma/client": "^7.0.0",
+    "@types/bcryptjs": "^2.4.6",
+    "bcryptjs": "^3.0.3",
     "clsx": "^2.1.1",
+    "dotenv": "^17.2.3",
     "next": "16.0.1",
+    "next-auth": "^5.0.0-beta.30",
     "react": "19.2.0",
     "react-dom": "19.2.0",
     "react-icons": "^5.5.0",
     "swiper": "^12.0.3",
+    "zod": "^4.1.13",
     "zustand": "^5.0.8"
   },
   "devDependencies": {
@@ -34,7 +40,12 @@
     "eslint-plugin-react": "^7.37.5",
     "eslint-plugin-react-hooks": "^7.0.1",
     "prettier": "^3.6.2",
+    "prisma": "^7.0.0",
     "tailwindcss": "^4",
+    "tsx": "^4.20.6",
     "typescript": "^5"
+  },
+  "prisma": {
+    "seed": "tsx src/seed/seed-database.ts"
   }
 }
