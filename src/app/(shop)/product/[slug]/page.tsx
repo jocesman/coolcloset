@@ -1,11 +1,7 @@
-import { titleFont } from '@/config/fonts';
-import { notFound } from 'next/navigation';
-import {
-  ProductMobileSlideShow,
-  ProductSlideShow,
-  AddToCart,
-} from '@/components';
-import prisma from '@/lib/prisma';
+import { titleFont } from '@/config/fonts'
+import { notFound } from 'next/navigation'
+import { ProductMobileSlideShow, ProductSlideShow, AddToCart } from '@/components'
+import prisma from '@/lib/prisma'
 
 interface Props {
   params: {
@@ -14,17 +10,17 @@ interface Props {
 }
 
 export default async function ProductPage({ params }: Props) {
-  const { slug } = await params;
+  const { slug } = await params
 
   const product = await prisma.product.findFirst({
     where: { slug },
     include: {
-      ProductImage: true
-    }
-  });
+      ProductImage: true,
+    },
+  })
 
   if (!product) {
-    notFound();
+    notFound()
   }
 
   return (
@@ -33,22 +29,20 @@ export default async function ProductPage({ params }: Props) {
         {/* Mobile Slideshow */}
         <ProductMobileSlideShow
           title={product.title}
-          images={product.ProductImage.map( image => image.url )}
+          images={product.ProductImage.map(image => image.url)}
           className="block md:hidden"
         />
         {/* Desktop Slideshow */}
         <ProductSlideShow
           title={product.title}
-          images={product.ProductImage.map( image => image.url )}
+          images={product.ProductImage.map(image => image.url)}
           className="hidden md:block"
         />
       </div>
 
       {/* 📄 Detalles */}
       <div className="col-span-1 px-5 p-4">
-        <h1 className={`${titleFont.className} antialiased font-bold text-xl`}>
-          {product.title}
-        </h1>
+        <h1 className={`${titleFont.className} antialiased font-bold text-xl`}>{product.title}</h1>
         <p className="text-lg mb-5">${product.price}</p>
 
         <AddToCart product={product} />
@@ -57,5 +51,5 @@ export default async function ProductPage({ params }: Props) {
         <p className="font-light">{product.description}</p>
       </div>
     </div>
-  );
+  )
 }

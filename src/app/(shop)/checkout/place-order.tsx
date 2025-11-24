@@ -1,6 +1,6 @@
 'use client';
 
-import { useEffect, useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import Link from 'next/link';
 import Image from 'next/image';
 import { useRouter } from 'next/navigation';
@@ -142,14 +142,24 @@ export const PlaceOrder = () => {
 };
 
 const OrderSummary = () => {
-  const { subTotal, tax, total, itemsInCart } = useCartStore((state) =>
-    state.getSummaryInformation()
-  );
+  const cart = useCartStore((state) => state.cart);
   const [loaded, setLoaded] = useState(false);
 
   useEffect(() => {
     setLoaded(true);
   }, []);
+
+  const { subTotal, tax, total, itemsInCart } = React.useMemo(() => {
+    const subTotal = cart.reduce(
+      (total, product) => product.quantity * product.price + total,
+      0
+    );
+    const tax = subTotal * 0.15;
+    const total = subTotal + tax;
+    const itemsInCart = cart.reduce((total, item) => total + item.quantity, 0);
+
+    return { subTotal, tax, total, itemsInCart };
+  }, [cart]);
 
   if (!loaded) return <p>Loading...</p>;
 

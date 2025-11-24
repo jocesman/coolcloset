@@ -4,10 +4,12 @@ import { useState } from 'react';
 import { CartProduct, useCartStore } from '@/store';
 import { SizeSelector } from '../size-selector/SizeSelector';
 import { QuantitySelector } from '../quantity-selector/QuantitySelector';
-import { Product, Size } from '@prisma/client'; // O usar la interfaz local si existe
+import { Product, Size, ProductImage } from '@prisma/client';
 
 interface Props {
-  product: Product;
+  product: Product & {
+    ProductImage: ProductImage[];
+  };
 }
 
 export const AddToCart = ({ product }: Props) => {
@@ -29,7 +31,7 @@ export const AddToCart = ({ product }: Props) => {
       price: product.price,
       quantity: quantity,
       size: size,
-      image: product.images?.[0] || '', // Asumiendo que images viene en el producto o hay que ajustarlo
+      image: product.ProductImage[0]?.url || '/imgs/placeholder.jpg',
     };
 
     addProductToCart(cartProduct);
@@ -49,7 +51,7 @@ export const AddToCart = ({ product }: Props) => {
       {/* Selector de Tallas */}
       <SizeSelector
         selectedSize={size}
-        availableSizes={product.sizes as any} // TODO: Ajustar tipos
+        availableSizes={product.sizes as any}
         onSizeChanged={setSize}
       />
 
