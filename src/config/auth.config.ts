@@ -1,7 +1,8 @@
 import type { NextAuthConfig } from 'next-auth';
-import NextAuth from 'next-auth';
 import Credentials from 'next-auth/providers/credentials';
 import { z } from 'zod';
+import bcryptjs from 'bcryptjs';
+import prisma from '@/lib/prisma';
 
 export const authConfig: NextAuthConfig = {
   pages: {
@@ -10,15 +11,7 @@ export const authConfig: NextAuthConfig = {
   },
   callbacks: {
     authorized({ auth, request: { nextUrl } }) {
-      const isLoggedIn = !!auth?.user;
-      // const isOnDashboard = nextUrl.pathname.startsWith('/dashboard');
-      // if (isOnDashboard) {
-      //   if (isLoggedIn) return true;
-      //   return false; // Redirect unauthenticated users to login page
-      // } else if (isLoggedIn) {
-      //   return Response.redirect(new URL('/dashboard', nextUrl));
-      // }
-      return true;
+      return true; // Permitir acceso, el middleware maneja la protección
     },
     jwt({ token, user }) {
       if (user) {
@@ -26,7 +19,7 @@ export const authConfig: NextAuthConfig = {
       }
       return token;
     },
-    session({ session, token, user }) {
+    session({ session, token }) {
       session.user = token.data as any;
       return session;
     },
@@ -38,22 +31,24 @@ export const authConfig: NextAuthConfig = {
           .object({ email: z.string().email(), password: z.string().min(6) })
           .safeParse(credentials);
 
-        if (parsedCredentials.success) {
-          const { email, password } = parsedCredentials.data;
-          
-          // TODO: Buscar usuario en base de datos
-          // const user = await prisma.user.findUnique({ where: { email: email.toLowerCase() } });
-          // if (!user) return null;
-          // if (!bcryptjs.compareSync(password, user.password)) return null;
-          // return user;
-          
-          return null; 
-        }
+        if (!parsedCredentials.success) return null;
 
-        return null;
+        const { email, password } = parsedCredentials.data;
+
+        // Buscar usuario en base de datos
+        const user = await prisma.user.findUnique({
+          where: { email: email.toLowerCase() },
+        });
+
+        if (!user) return null;
+
+        // Verificar contraseña
+        if (!bcryptjs.compareSync(password, user.password)) return null;
+
+        // Retornar usuario sin la contraseña
+        const { password: _, ...userWithoutPassword } = user;
+        return userWithoutPassword;
       },
     }),
   ],
 };
-
-export const { signIn, signOut, auth, handlers } = NextAuth(authConfig);

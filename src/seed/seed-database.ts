@@ -1,5 +1,6 @@
 import { initialData } from './seed-data';
 import prisma from '../lib/prisma';
+import bcryptjs from 'bcryptjs';
 
 async function main() {
   // 1. Borrar registros previos
@@ -63,16 +64,14 @@ async function main() {
   });
 
   // 5. Usuarios
-  // users.forEach(async(user) => {
   for (const user of users) {
     const { password, ...rest } = user;
-    // TODO: Hash password
-    // const passwordHash = bcryptjs.hashSync(password);
+    const passwordHash = bcryptjs.hashSync(password, 10);
     
     await prisma.user.create({
       data: {
         ...rest,
-        password: password // passwordHash
+        password: passwordHash
       }
     })
   }

@@ -4,7 +4,28 @@ import { useState } from 'react';
 import { CartProduct, useCartStore } from '@/store';
 import { SizeSelector } from '../size-selector/SizeSelector';
 import { QuantitySelector } from '../quantity-selector/QuantitySelector';
-import { Product, Size, ProductImage } from '@prisma/client';
+
+type Size = 'XS' | 'S' | 'M' | 'L' | 'XL' | 'XXL' | 'XXXL';
+
+type ProductImage = {
+  id: number;
+  url: string;
+  productId: string;
+};
+
+type Product = {
+  id: string;
+  title: string;
+  description: string;
+  inStock: number;
+  price: number;
+  sizes: Size[];
+  slug: string;
+  tags: string[];
+  gender: string;
+  type: string;
+  categoryId: string;
+};
 
 interface Props {
   product: Product & {
