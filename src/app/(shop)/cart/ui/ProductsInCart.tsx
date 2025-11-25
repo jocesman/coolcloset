@@ -18,7 +18,18 @@ export const ProductsInCart = () => {
   }, []);
 
   if (!loaded) {
-    return <p>Cargando...</p>;
+    return <p className="text-center py-4">Cargando...</p>;
+  }
+
+  if (productsInCart.length === 0) {
+    return (
+      <div className="text-center py-8">
+        <p className="text-gray-500 mb-4">Tu carrito está vacío</p>
+        <Link href="/" className="btn-primary inline-block">
+          Ver productos
+        </Link>
+      </div>
+    );
   }
 
   return (
@@ -26,7 +37,7 @@ export const ProductsInCart = () => {
       {productsInCart.map((product) => (
         <div
           key={`${product.slug}-${product.size}`}
-          className="flex mb-3 p-2 border border-green-400 hover:border-amber-400 hover:border-2"
+          className="flex flex-col sm:flex-row mb-4 p-3 sm:p-4 border border-gray-200 rounded-lg hover:border-blue-400 hover:shadow-md transition-all"
         >
           <Image
             src={`/products/${product.image}`}
@@ -37,20 +48,30 @@ export const ProductsInCart = () => {
               height: '100px',
             }}
             alt={product.title}
-            className="mr-5 rounded"
+            className="rounded mb-3 sm:mb-0 sm:mr-5 self-center sm:self-start"
           />
-          <div>
-            <Link href={`/product/${product.slug}`} className="hover:underline cursor-pointer">
+          <div className="flex-1">
+            <Link 
+              href={`/product/${product.slug}`} 
+              className="hover:underline cursor-pointer font-medium text-sm sm:text-base"
+            >
               {product.title}
             </Link>
-            <p>${product.price}</p>
+            <p className="text-lg font-bold mt-1">${product.price}</p>
             <p className="text-sm text-gray-500">Talla: {product.size}</p>
-            <QuantitySelector
-              quantity={product.quantity}
-              onQuantityChanged={(quantity) => updateProductQuantity(product, quantity)}
-            />
-            <button onClick={() => removeProduct(product)} className="underline mt-3">
-              Eliminar este Artículo
+            
+            <div className="mt-3">
+              <QuantitySelector
+                quantity={product.quantity}
+                onQuantityChanged={(quantity) => updateProductQuantity(product, quantity)}
+              />
+            </div>
+            
+            <button 
+              onClick={() => removeProduct(product)} 
+              className="text-red-600 hover:text-red-800 underline mt-3 text-sm"
+            >
+              Eliminar
             </button>
           </div>
         </div>

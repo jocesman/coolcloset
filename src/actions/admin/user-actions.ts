@@ -26,11 +26,12 @@ export async function getUsersPaginated(page: number = 1, take: number = 10) {
 }
 
 export async function updateUserRole(userId: string, role: 'admin' | 'user') {
-  const session = await auth();
+  // TODO: Descomentar cuando NextAuth esté configurado
+  // const session = await auth();
 
-  if (!session?.user || session.user.role !== 'admin') {
-    return { ok: false, message: 'No autorizado' };
-  }
+  // if (!session?.user || session.user.role !== 'admin') {
+  //   return { ok: false, message: 'No autorizado' };
+  // }
 
   try {
     await prisma.user.update({

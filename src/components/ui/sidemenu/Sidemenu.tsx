@@ -59,7 +59,7 @@ export const Sidemenu = ({ isAuthenticated, isAdmin }: Props) => {
           onClick={() => closeMenu()}
         />
 
-        {/* Input */}
+        {/* Input de búsqueda */}
         <div className="relative mt-14">
           <IoSearchOutline size={30} className="absolute top-2 left-2" />
           <input
@@ -67,6 +67,15 @@ export const Sidemenu = ({ isAuthenticated, isAdmin }: Props) => {
             placeholder="Buscar"
             className="w-full bg-gray-50 rounded pl-10 py-1 pr-10 border-b-2 text-xl border-gray-200
                        focus:outline-none focus:border-blue-500"
+            onKeyDown={(e) => {
+              if (e.key === 'Enter') {
+                const query = e.currentTarget.value;
+                if (query.trim()) {
+                  closeMenu();
+                  window.location.href = `/search?q=${encodeURIComponent(query)}`;
+                }
+              }
+            }}
           />
         </div>
 

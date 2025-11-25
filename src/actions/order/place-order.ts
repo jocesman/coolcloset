@@ -46,6 +46,18 @@ export const placeOrder = async (
     },
   });
 
+  // Verificar que todos los productos existan
+  const missingProducts = productIds.filter(
+    (item) => !products.find((p) => p.id === item.productId)
+  );
+
+  if (missingProducts.length > 0) {
+    return {
+      ok: false,
+      message: 'Algunos productos en tu carrito ya no están disponibles. Por favor, actualiza tu carrito.',
+    };
+  }
+
   // Calcular los montos // Encabezado
   const itemsInOrder = productIds.reduce((count, p) => count + p.quantity, 0);
 
@@ -55,7 +67,9 @@ export const placeOrder = async (
       const productQuantity = item.quantity;
       const product = products.find((product) => product.id === item.productId);
 
-      if (!product) throw new Error(`${item.productId} no existe - 500`);
+      if (!product) {
+        throw new Error('Producto no encontrado');
+      }
 
       const subTotal = product.price * productQuantity;
 

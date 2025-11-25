@@ -28,7 +28,7 @@ export const DeleteProductButton = ({ id }: Props) => {
     <button
       onClick={handleDelete}
       disabled={isDeleting}
-      className="text-red-600 hover:text-red-800 disabled:opacity-50"
+      className="flex-1 md:flex-none text-center md:text-left py-2 md:py-0 bg-red-600 md:bg-transparent text-white md:text-red-600 rounded md:rounded-none hover:bg-red-700 md:hover:bg-transparent md:hover:text-red-800 disabled:opacity-50 px-3 md:px-0"
     >
       {isDeleting ? 'Eliminando...' : 'Eliminar'}
     </button>
