@@ -1,9 +1,39 @@
+'use client';
+
+import { useEffect, useState } from 'react';
 import { Title } from '@/components';
 import Link from 'next/link';
+import { useRouter } from 'next/navigation';
 import { ProductsInCart } from './ui/ProductsInCart';
 import { OrderSummary } from './ui/OrderSummary';
+import { useCartStore } from '@/store';
 
 export default function CartPage() {
+  const router = useRouter();
+  const cart = useCartStore((state) => state.cart);
+  const [loaded, setLoaded] = useState(false);
+
+  useEffect(() => {
+    setLoaded(true);
+  }, []);
+
+  // Redirigir a /empty si el carrito está vacío después de cargar
+  useEffect(() => {
+    if (loaded && cart.length === 0) {
+      router.push('/empty');
+    }
+  }, [loaded, cart.length, router]);
+
+  if (!loaded) {
+    return (
+      <div className="flex justify-center items-center min-h-[60vh]">
+        <p>Cargando carrito...</p>
+      </div>
+    );
+  }
+
+  const isCartEmpty = cart.length === 0;
+
   return (
     <div className="flex justify-center items-center mb-20 px-4 sm:px-6 lg:px-10">
       <div className="flex flex-col w-full max-w-7xl">
@@ -27,10 +57,25 @@ export default function CartPage() {
             <OrderSummary />
 
             <div className="mt-5 sm:mt-7 mb-2 w-full">
-              <Link href="/checkout/address" className="flex btn-primary justify-center">
-                Checkout
-              </Link>
+              {isCartEmpty ? (
+                <button
+                  disabled
+                  className="w-full py-3 px-6 rounded-lg font-semibold text-white bg-gray-400 cursor-not-allowed"
+                >
+                  Carrito vacío
+                </button>
+              ) : (
+                <Link href="/checkout/address" className="flex btn-primary justify-center">
+                  Checkout
+                </Link>
+              )}
             </div>
+
+            {isCartEmpty && (
+              <p className="text-sm text-gray-500 text-center mt-2">
+                Agrega productos para continuar
+              </p>
+            )}
           </div>
         </div>
       </div>
