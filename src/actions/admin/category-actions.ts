@@ -15,53 +15,50 @@ export async function getCategories() {
 }
 
 export async function createCategory(name: string) {
-  // TODO: Descomentar cuando NextAuth esté configurado
-  // const session = await auth();
+  const session = await auth();
 
-  // if (!session?.user || session.user.role !== 'admin') {
-  //   return { ok: false, message: 'No autorizado' };
-  // }
+  if (!session?.user || session.user.role !== 'admin') {
+    return { ok: false, message: 'No autorizado' };
+  }
 
   try {
-    await prisma.category.create({
+    const category = await prisma.category.create({
       data: { name },
     });
 
     revalidatePath('/admin/categories');
-    return { ok: true };
-  } catch (error) {
-    return { ok: false, message: 'Error al crear categoría' };
+    return { ok: true, category };
+  } catch (error: any) {
+    return { ok: false, message: error.message || 'Error al crear categoría' };
   }
 }
 
 export async function updateCategory(id: string, name: string) {
-  // TODO: Descomentar cuando NextAuth esté configurado
-  // const session = await auth();
+  const session = await auth();
 
-  // if (!session?.user || session.user.role !== 'admin') {
-  //   return { ok: false, message: 'No autorizado' };
-  // }
+  if (!session?.user || session.user.role !== 'admin') {
+    return { ok: false, message: 'No autorizado' };
+  }
 
   try {
-    await prisma.category.update({
+    const category = await prisma.category.update({
       where: { id },
       data: { name },
     });
 
     revalidatePath('/admin/categories');
-    return { ok: true };
-  } catch (error) {
-    return { ok: false, message: 'Error al actualizar categoría' };
+    return { ok: true, category };
+  } catch (error: any) {
+    return { ok: false, message: error.message || 'Error al actualizar categoría' };
   }
 }
 
 export async function deleteCategory(id: string) {
-  // TODO: Descomentar cuando NextAuth esté configurado
-  // const session = await auth();
+  const session = await auth();
 
-  // if (!session?.user || session.user.role !== 'admin') {
-  //   return { ok: false, message: 'No autorizado' };
-  // }
+  if (!session?.user || session.user.role !== 'admin') {
+    return { ok: false, message: 'No autorizado' };
+  }
 
   try {
     await prisma.category.delete({
@@ -70,7 +67,7 @@ export async function deleteCategory(id: string) {
 
     revalidatePath('/admin/categories');
     return { ok: true };
-  } catch (error) {
-    return { ok: false, message: 'Error al eliminar categoría. Puede tener productos asociados.' };
+  } catch (error: any) {
+    return { ok: false, message: error.message || 'Error al eliminar categoría' };
   }
 }

@@ -125,6 +125,21 @@ export const Sidemenu = ({ isAuthenticated, isAdmin }: Props) => {
         {/* Línea de Separación */}
         {isAdmin && <div className="w-full h-px bg-blue-400 my-10" />}
 
+        {/* Link destacado al Panel Admin */}
+        {isAdmin && (
+          <Link
+            href="/admin"
+            onClick={closeMenu}
+            className="flex items-center p-4 bg-gradient-to-r from-purple-600 to-blue-600 text-white rounded-lg hover:from-purple-700 hover:to-blue-700 transition-all shadow-lg mb-4"
+          >
+            <IoShirtOutline size={30} />
+            <div className="ml-3">
+              <p className="text-lg font-bold">Panel de Administración</p>
+              <p className="text-xs opacity-90">Gestionar tienda</p>
+            </div>
+          </Link>
+        )}
+
         {/* Menú Admin */}
         {isAdmin && (
           <>
