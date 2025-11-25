@@ -34,33 +34,49 @@ export default async function OrdersPage() {
 
         {orders && orders.length > 0 && (
           <div className="space-y-4">
-            {orders.map((order) => (
-              <div
-                key={order.id}
-                className="bg-white rounded-lg shadow p-4 sm:p-6 hover:shadow-lg transition-shadow"
-              >
-                <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center mb-4 gap-3">
-                  <div>
-                    <h3 className="font-semibold text-lg">
-                      Orden #{order.id.slice(0, 8)}
-                    </h3>
-                    <p className="text-sm text-gray-500">
-                      {new Date(order.createdAt).toLocaleDateString('es-ES', {
-                        year: 'numeric',
-                        month: 'long',
-                        day: 'numeric',
-                      })}
-                    </p>
+            {orders.map((order) => {
+              const isPaid = order.isPaid ?? false;
+              
+              return (
+                <div
+                  key={order.id}
+                  className="bg-white rounded-lg shadow p-4 sm:p-6 hover:shadow-lg transition-shadow relative"
+                >
+                  {/* Indicador de estado de pago */}
+                  <div className="absolute top-4 right-4">
+                    <div
+                      className={`w-4 h-4 rounded-full ${
+                        isPaid ? 'bg-green-500' : 'bg-red-500'
+                      }`}
+                      title={isPaid ? 'Pagada' : 'Pendiente de pago'}
+                    />
                   </div>
-                  <div className="text-right">
-                    <p className="text-2xl font-bold text-blue-600">
-                      {currencyFormat(order.total)}
-                    </p>
-                    <p className="text-sm text-gray-500">
-                      {order.itemsInOrder} artículo{order.itemsInOrder !== 1 ? 's' : ''}
-                    </p>
+
+                  <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center mb-4 gap-3 pr-8">
+                    <div>
+                      <h3 className="font-semibold text-lg">
+                        Orden #{order.id.slice(0, 8)}
+                      </h3>
+                      <p className="text-sm text-gray-500">
+                        {new Date(order.createdAt).toLocaleDateString('es-ES', {
+                          year: 'numeric',
+                          month: 'long',
+                          day: 'numeric',
+                        })}
+                      </p>
+                      <p className={`text-xs font-medium mt-1 ${isPaid ? 'text-green-600' : 'text-red-600'}`}>
+                        {isPaid ? '✓ Pagada' : '⏳ Pendiente de pago'}
+                      </p>
+                    </div>
+                    <div className="text-right">
+                      <p className="text-2xl font-bold text-blue-600">
+                        {currencyFormat(order.total)}
+                      </p>
+                      <p className="text-sm text-gray-500">
+                        {order.itemsInOrder} artículo{order.itemsInOrder !== 1 ? 's' : ''}
+                      </p>
+                    </div>
                   </div>
-                </div>
 
                 {/* Productos */}
                 <div className="border-t pt-4 mb-4">
@@ -116,7 +132,8 @@ export default async function OrdersPage() {
                   Ver detalles
                 </Link>
               </div>
-            ))}
+            );
+            })}
           </div>
         )}
       </div>
