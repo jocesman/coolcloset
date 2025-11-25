@@ -7,6 +7,7 @@ import { titleFont } from '@/config/fonts';
 import clsx from 'clsx';
 import { IoCardOutline } from 'react-icons/io5';
 import { getOrderById } from '@/actions/admin/order-actions';
+import { PayPalButton } from '@/components/paypal/PayPalButton';
 
 interface Props {
   params: {
@@ -145,6 +146,34 @@ export default async function OrderDetailPage({ params }: Props) {
                   {isPaid ? 'Orden Pagada' : 'Pendiente de Pago'}
                 </span>
               </div>
+
+              {/* Botón de PayPal para órdenes pendientes */}
+              {!isPaid && (
+                <div className="mt-4">
+                  <PayPalButton orderId={order.id} amount={order.total} />
+                </div>
+              )}
+
+              {/* Información de pago */}
+              {isPaid && order.paidAt && (
+                <div className="mt-4 p-3 bg-green-50 rounded-lg">
+                  <p className="text-sm text-green-800">
+                    <strong>Pagada el:</strong>{' '}
+                    {new Date(order.paidAt).toLocaleDateString('es-ES', {
+                      year: 'numeric',
+                      month: 'long',
+                      day: 'numeric',
+                      hour: '2-digit',
+                      minute: '2-digit',
+                    })}
+                  </p>
+                  {order.transactionId && (
+                    <p className="text-xs text-green-700 mt-1">
+                      ID de transacción: {order.transactionId}
+                    </p>
+                  )}
+                </div>
+              )}
             </div>
           </div>
         </div>
