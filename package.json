@@ -9,6 +9,7 @@
     "start": "next start",
     "lint": "eslint",
     "format": "prettier --write .",
+    "postinstall": "prisma generate",
     "test": "echo \"No tests configured\" && exit 0"
   },
   "dependencies": {
