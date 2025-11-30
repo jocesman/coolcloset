@@ -271,10 +271,10 @@ DATABASE_URL="tu-url-de-produccion" npx prisma db seed
 <!-- Añade tus capturas de pantalla aquí -->
 
 ```markdown
-![Home](./screenshots/home.png)
-![Product](./screenshots/product.png)
-![Cart](./screenshots/cart.png)
-![Admin Dashboard](./screenshots/admin.png)
+[Home](./screenshots/home.png)
+[Product](./screenshots/product.png)
+[Cart](./screenshots/cart.png)
+[Admin Dashboard](./screenshots/admin.png)
 ```
 
 ---
