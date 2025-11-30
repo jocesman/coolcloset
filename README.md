@@ -270,12 +270,19 @@ DATABASE_URL="tu-url-de-produccion" npx prisma db seed
 
 ### 🏠 Página Principal
 
-```markdown
 ![Home](./screenshots/home.png)
+
+### 📦 Detalle de Producto
+
 ![Product](./screenshots/product.png)
+
+### 🛒 Carrito de Compras
+
 ![Cart](./screenshots/cart.png)
+
+### 👨‍💼 Panel de Administración
+
 ![Admin Dashboard](./screenshots/admin.png)
-```
 
 ---
 
