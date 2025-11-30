@@ -57,12 +57,11 @@ export async function getProductBySlug(slug: string) {
 }
 
 export async function createProduct(data: ProductFormData) {
-  // TODO: Descomentar cuando NextAuth esté configurado
-  // const session = await auth();
+  const session = await auth();
 
-  // if (!session?.user || session.user.role !== 'admin') {
-  //   return { ok: false, message: 'No autorizado' };
-  // }
+  if (!session?.user || session.user.role !== 'admin') {
+    return { ok: false, message: 'No autorizado' };
+  }
 
   try {
     const { images, tags, categoryId, ...productData } = data;
@@ -70,6 +69,7 @@ export async function createProduct(data: ProductFormData) {
     const product = await prisma.product.create({
       data: {
         ...productData,
+        gender: productData.gender as any,
         tags: tags.split(',').map((t) => t.trim()),
         sizes: productData.sizes as any,
         category: {
@@ -92,12 +92,11 @@ export async function createProduct(data: ProductFormData) {
 }
 
 export async function updateProduct(slug: string, data: ProductFormData) {
-  // TODO: Descomentar cuando NextAuth esté configurado
-  // const session = await auth();
+  const session = await auth();
 
-  // if (!session?.user || session.user.role !== 'admin') {
-  //   return { ok: false, message: 'No autorizado' };
-  // }
+  if (!session?.user || session.user.role !== 'admin') {
+    return { ok: false, message: 'No autorizado' };
+  }
 
   try {
     const { images, tags, categoryId, ...productData } = data;
@@ -112,6 +111,7 @@ export async function updateProduct(slug: string, data: ProductFormData) {
       where: { slug },
       data: {
         ...productData,
+        gender: productData.gender as any,
         tags: tags.split(',').map((t) => t.trim()),
         sizes: productData.sizes as any,
         category: {
@@ -135,12 +135,11 @@ export async function updateProduct(slug: string, data: ProductFormData) {
 }
 
 export async function deleteProduct(id: string) {
-  // TODO: Descomentar cuando NextAuth esté configurado
-  // const session = await auth();
+  const session = await auth();
 
-  // if (!session?.user || session.user.role !== 'admin') {
-  //   return { ok: false, message: 'No autorizado' };
-  // }
+  if (!session?.user || session.user.role !== 'admin') {
+    return { ok: false, message: 'No autorizado' };
+  }
 
   try {
     await prisma.product.delete({

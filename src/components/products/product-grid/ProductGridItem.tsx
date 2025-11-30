@@ -4,6 +4,7 @@ import { descripcionProd } from '@/config/fonts'
 import { Product } from '@/interfaces'
 import Image from 'next/image'
 import Link from 'next/link'
+import { getProductImage } from '@/utils/product-image-loader'
 import { useState } from 'react'
 
 interface Props {
@@ -17,7 +18,7 @@ export const ProductGridItem = ({ product }: Props) => {
     <div className="rounded-md overflow-hidden fade-in hover:text-green-700 hover:font-bold">
       <Link href={`/product/${product.slug}`}>
         <Image
-          src={`/products/${displayImage}`}
+          src={getProductImage(displayImage)}
           alt={product.title}
           className="w-full object-cover rounded-b-2xl"
           width={500}

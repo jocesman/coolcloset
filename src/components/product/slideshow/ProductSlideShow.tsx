@@ -6,6 +6,8 @@ import { Swiper, SwiperSlide } from 'swiper/react'
 import { FreeMode, Navigation, Thumbs, Autoplay } from 'swiper/modules'
 import Image from 'next/image'
 
+import { getProductImage } from '@/utils/product-image-loader'
+
 import 'swiper/css'
 import 'swiper/css/free-mode'
 import 'swiper/css/navigation'
@@ -48,7 +50,7 @@ export const ProductSlideShow = ({ images, title, className }: Props) => {
             <Image
               width={1024}
               height={800}
-              src={`/products/${image}`}
+              src={getProductImage(image)}
               alt={title}
               className="rounded object-fill"
             />
@@ -72,7 +74,7 @@ export const ProductSlideShow = ({ images, title, className }: Props) => {
             <Image
               width={300}
               height={300}
-              src={`/products/${image}`}
+              src={getProductImage(image)}
               alt={title}
               className="rounded object-fill"
             />

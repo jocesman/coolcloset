@@ -20,7 +20,7 @@ export async function authenticate(
         case 'CredentialsSignin':
           return 'Credenciales incorrectas.';
         default:
-          return 'Algo salió mal.';
+          return 'Algo salió mal. Revise conexión o credenciales';
       }
     }
     throw error;
@@ -40,7 +40,7 @@ export async function login(email: string, password: string) {
     console.log(error);
     return {
       ok: false,
-      message: 'No se pudo iniciar sesión',
+      message: 'No se pudo iniciar sesión. Puede intentarlo de nuevo.',
     };
   }
 }

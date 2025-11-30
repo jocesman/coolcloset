@@ -4,6 +4,7 @@ import { logout } from '@/actions/auth/logout';
 import { useUIStore } from '@/store';
 import clsx from 'clsx';
 import Link from 'next/link';
+import { useEffect, useState } from 'react';
 import {
   IoCloseOutline,
   IoLogInOutline,
@@ -23,6 +24,22 @@ interface Props {
 export const Sidemenu = ({ isAuthenticated, isAdmin }: Props) => {
   const isSideOpenMenu = useUIStore((state) => state.isSideMenuOpen);
   const closeMenu = useUIStore((state) => state.closeSideMenu);
+  
+  // Estado para controlar la hidratación y evitar bloqueos iniciales
+  const [loaded, setLoaded] = useState(false);
+
+  useEffect(() => {
+    setLoaded(true);
+  }, []);
+
+  // Efecto para asegurar que el menú esté cerrado al cargar la página
+  useEffect(() => {
+    closeMenu();
+  }, [closeMenu]);
+
+  if (!loaded) {
+    return null; // O retornar solo el nav oculto si es necesario para SEO, pero para un menú lateral está bien esperar
+  }
 
   const handleLogout = () => {
     closeMenu();
@@ -31,6 +48,7 @@ export const Sidemenu = ({ isAuthenticated, isAdmin }: Props) => {
 
   return (
     <div>
+      {/* Background */}
       {/* Background */}
       {isSideOpenMenu && (
         <div className="fixed top-0 left-0 w-screen h-screen z-10 bg-gray-400 opacity-10" />

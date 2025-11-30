@@ -23,7 +23,6 @@ type Product = {
   slug: string;
   tags: string[];
   gender: string;
-  type: string;
   categoryId: string;
 };
 

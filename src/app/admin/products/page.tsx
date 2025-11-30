@@ -3,6 +3,8 @@ import Image from 'next/image';
 import { getProductsPaginated } from '@/actions/admin/product-actions';
 import { DeleteProductButton } from './ui/DeleteProductButton';
 
+import { getProductImage } from '@/utils/product-image-loader';
+
 interface Props {
   searchParams: {
     page?: string;
@@ -10,7 +12,8 @@ interface Props {
 }
 
 export default async function ProductsPage({ searchParams }: Props) {
-  const page = Number(searchParams.page) || 1;
+  const { page: pageParam } = await searchParams;
+  const page = Number(pageParam) || 1;
   const { products, totalPages } = await getProductsPaginated(page, 10);
 
   return (
@@ -52,7 +55,7 @@ export default async function ProductsPage({ searchParams }: Props) {
               <tr key={product.id}>
                 <td className="px-4 lg:px-6 py-4">
                   <Image
-                    src={`/products/${product.ProductImage[0]?.url || 'placeholder.jpg'}`}
+                    src={getProductImage(product.ProductImage[0]?.url)}
                     alt={product.title}
                     width={50}
                     height={50}
@@ -86,7 +89,7 @@ export default async function ProductsPage({ searchParams }: Props) {
           <div key={product.id} className="bg-white rounded-lg shadow p-4">
             <div className="flex gap-4 mb-3">
               <Image
-                src={`/products/${product.ProductImage[0]?.url || 'placeholder.jpg'}`}
+                src={getProductImage(product.ProductImage[0]?.url)}
                 alt={product.title}
                 width={80}
                 height={80}

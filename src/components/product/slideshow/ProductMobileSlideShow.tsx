@@ -4,6 +4,8 @@ import Image from 'next/image'
 import { Swiper, SwiperSlide } from 'swiper/react'
 import { FreeMode, Navigation, Autoplay, Pagination } from 'swiper/modules'
 
+import { getProductImage } from '@/utils/product-image-loader'
+
 import 'swiper/css'
 import 'swiper/css/free-mode'
 import 'swiper/css/pagination'
@@ -31,7 +33,7 @@ export const ProductMobileSlideShow = ({ images, title, className }: Props) => {
             <Image
               width={600}
               height={500}
-              src={`/products/${image}`}
+              src={getProductImage(image)}
               alt={title}
               className="object-fill"
             />

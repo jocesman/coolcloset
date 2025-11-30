@@ -4,6 +4,7 @@ import { useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { useRouter } from 'next/navigation';
 import { createProduct, updateProduct } from '@/actions/admin/product-actions';
+import { ImageUpload } from '@/components';
 import clsx from 'clsx';
 
 type FormData = {
@@ -16,7 +17,6 @@ type FormData = {
   gender: string;
   categoryId: string;
   sizes: string[];
-  images: string;
 };
 
 interface Props {
@@ -36,6 +36,9 @@ export const ProductForm = ({ product, categories }: Props) => {
   const router = useRouter();
   const [message, setMessage] = useState('');
   const [isSubmitting, setIsSubmitting] = useState(false);
+  const [productImages, setProductImages] = useState<string[]>(
+    product?.ProductImage?.map((img: any) => img.url) || []
+  );
 
   const {
     register,
@@ -48,7 +51,6 @@ export const ProductForm = ({ product, categories }: Props) => {
       ? {
           ...product,
           tags: product.tags.join(', '),
-          images: product.ProductImage.map((img: any) => img.url).join('\n'),
         }
       : {
           sizes: [],
@@ -73,11 +75,18 @@ export const ProductForm = ({ product, categories }: Props) => {
     setIsSubmitting(true);
     setMessage('');
 
+    // Validar que haya al menos una imagen
+    if (productImages.length === 0) {
+      setMessage('Debes subir al menos una imagen');
+      setIsSubmitting(false);
+      return;
+    }
+
     const formData = {
       ...data,
       price: Number(data.price),
       inStock: Number(data.inStock),
-      images: data.images.split('\n').filter((img) => img.trim()),
+      images: productImages,
     };
 
     const result = product
@@ -257,22 +266,13 @@ export const ProductForm = ({ product, categories }: Props) => {
         {/* Imágenes */}
         <div className="md:col-span-2">
           <label className="block text-sm font-medium mb-2">
-            URLs de Imágenes (una por línea) *
+            Imágenes del Producto *
           </label>
-          <textarea
-            rows={4}
-            placeholder="1740176-00-A_0_2000.jpg&#10;1740176-00-A_1.jpg"
-            className={clsx('p-2 border rounded w-full', {
-              'border-red-500': errors.images,
-            })}
-            {...register('images', { required: 'Al menos una imagen es requerida' })}
+          <ImageUpload
+            images={productImages}
+            onChange={setProductImages}
+            maxImages={5}
           />
-          <p className="text-sm text-gray-500 mt-1">
-            Ingresa los nombres de archivo que están en /public/products/
-          </p>
-          {errors.images && (
-            <span className="text-red-500 text-sm">{errors.images.message}</span>
-          )}
         </div>
       </div>
 

@@ -43,7 +43,9 @@ export const OrderSummary = () => {
       <span className="text-right">{currencyFormat(tax)}</span>
 
       <span className="text-2xl mt-5">Total:</span>
-      <span className="text-2xl mt-5 text-right">{currencyFormat(total)}</span>
+      <span className="text-2xl mt-5 text-right">
+        {currencyFormat(total)}
+      </span>
     </div>
   );
 };

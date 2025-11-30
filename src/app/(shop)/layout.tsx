@@ -12,7 +12,7 @@ export default async function ShopLayout({
     <main className="min-h-screen">
       <TopMenu
         isAuthenticated={!!session?.user}
-        userName={session?.user?.name}
+        userName={session?.user?.name ?? undefined}
       />
       <Sidemenu
         isAuthenticated={!!session?.user}
