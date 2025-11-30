@@ -314,10 +314,10 @@ Este proyecto está bajo la Licencia MIT. Ver el archivo `LICENSE` para más det
 
 ## 👨‍💻 Autor
 
-**José Cedeño**
+**José Céspedes**
 
 - GitHub: [@jocesman](https://github.com/jocesman)
-- LinkedIn: [Tu LinkedIn](https://linkedin.com/in/tu-perfil)
+- LinkedIn: [Tu LinkedIn](https://linkedin.com/in/ing-jose-cespedes)
 - Portfolio: [Tu Portfolio](https://tu-portfolio.com)
 
 ---
@@ -334,5 +334,5 @@ Este proyecto está bajo la Licencia MIT. Ver el archivo `LICENSE` para más det
 
 <div align="center">
   <p>⭐ Si te gustó este proyecto, dale una estrella en GitHub</p>
-  <p>Made with ❤️ by <a href="https://github.com/jocesman">José Cedeño</a></p>
+  <p>Made with ❤️ by <a href="https://github.com/jocesman">José Céspedes</a></p>
 </div>
